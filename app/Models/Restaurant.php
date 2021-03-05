@@ -10,6 +10,7 @@ class Restaurant extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['AvailableSeats','Movies',];
     public $Reservations;
 
     public function Buy($Reservations)
