@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFestivalsTable extends Migration
+class CreateFestivalUserPivotTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateFestivalsTable extends Migration
      */
     public function up()
     {
-        Schema::create('festivals', function (Blueprint $table) {
+        Schema::create('festival_user', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('festival_id');
+            $table->unsignedBigInteger('user_id');
+            $table->timestamps('start_time');
+            $table->timestamps('end_time');
             $table->timestamps();
-            $table->string('location');
-            $table->integer('NumberOfTickets');
-            $table->dateTime('StartDate');
-            $table->dateTime('EndDate');
         });
     }
 
@@ -30,6 +30,6 @@ class CreateFestivalsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('festivals');
+        Schema::dropIfExists('festival_user');
     }
 }

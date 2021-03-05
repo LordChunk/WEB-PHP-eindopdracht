@@ -10,6 +10,10 @@ class Festival extends Model
 {
     use HasFactory;
 
+    public function visitors(){
+        return $this->belongsToMany(User::class);
+    }
+
     public function Buy($StartDate, $EndDate, $Photos, $amountOfTickets)
     {
         // TODO: Implement Buy() method.
