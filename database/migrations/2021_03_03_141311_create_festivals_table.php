@@ -16,6 +16,9 @@ class CreateFestivalsTable extends Migration
         Schema::create('festivals', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->integer('NumberOfTickets');
+            $table->dateTime('StartDate');
+            $table->dateTime('EndDate');
         });
     }
 

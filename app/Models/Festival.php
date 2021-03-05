@@ -10,11 +10,6 @@ class Festival extends Model
 {
     use HasFactory;
 
-    public $MaxNumberOfTicketsForSale;
-    public $MaxNumberOfTicketsBuyable;
-    public $StartDate;
-    public $EndDate;
-
     public function Buy($StartDate, $EndDate, $Photos, $amountOfTickets)
     {
         // TODO: Implement Buy() method.
