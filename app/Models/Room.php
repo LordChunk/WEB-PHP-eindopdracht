@@ -13,7 +13,7 @@ class Room extends Model
     }
 
     public function shows(){
-        return $this->belongsToMany(Movie::class);
+        return $this->hasMany(Show::class);
     }
 
     use HasFactory;

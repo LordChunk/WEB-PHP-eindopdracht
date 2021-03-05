@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Movie extends Model
 {
-    public function showings(){
-        return $this->belongsToMany(Room::class);
+    public function shows(){
+        return $this->hasMany(Show::class);
     }
     use HasFactory;
 }
