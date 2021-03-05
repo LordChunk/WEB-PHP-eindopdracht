@@ -14,7 +14,7 @@ class CinemaController extends Controller
      */
     public function index()
     {
-        //
+        echo('hello world');
     }
 
     /**
@@ -46,7 +46,7 @@ class CinemaController extends Controller
      */
     public function show(Cinema $cinema)
     {
-        //
+        dd($cinema);
     }
 
     /**
