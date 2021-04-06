@@ -13,8 +13,8 @@ class Restaurant extends Model
     protected $fillable = ['AvailableSeats','Movies',];
     public $Reservations;
 
-    public function Buy($Reservations)
+    public function Restaurant_type()
     {
-        // TODO: Implement Buy() method.
+        return $this->hasOne(Restaurant_type::class);
     }
 }

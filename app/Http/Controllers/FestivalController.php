@@ -14,7 +14,8 @@ class FestivalController extends Controller
      */
     public function index()
     {
-        //
+        $festivals = Customer::all();
+        return view('festivals.index', compact('festivals'));
     }
 
     /**
@@ -24,7 +25,7 @@ class FestivalController extends Controller
      */
     public function create()
     {
-        //
+        return view('festivals.create');
     }
 
     /**
@@ -35,7 +36,15 @@ class FestivalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'user_id' => ['required'],
+            'start_time' => ['required'],
+            'end_time' => ['required'],
+        ]);
+
+        $festival = Customer::create($data);
+
+        return redirect()->route('festivals.show', $festival);
     }
 
     /**
@@ -46,7 +55,7 @@ class FestivalController extends Controller
      */
     public function show(Festival $festival)
     {
-        //
+        return view('festivals.show', compact('festival'));
     }
 
     /**
@@ -57,7 +66,7 @@ class FestivalController extends Controller
      */
     public function edit(Festival $festival)
     {
-        //
+        return view('festivals.edit', compact('festival'));
     }
 
     /**
@@ -69,7 +78,15 @@ class FestivalController extends Controller
      */
     public function update(Request $request, Festival $festival)
     {
-        //
+        $data = $request->validate([
+            'user_id' => ['required'],
+            'start_time' => ['required'],
+            'end_time' => ['required'],
+        ]);
+
+        $festival->update($data);
+
+        return redirect()->route('festivals.show', $festival);
     }
 
     /**
@@ -80,6 +97,7 @@ class FestivalController extends Controller
      */
     public function destroy(Festival $festival)
     {
-        //
+        $festival->delete();
+        return Redirect::to('festivals.index');
     }
 }
