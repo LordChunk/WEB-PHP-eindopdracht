@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cinema;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class CinemaController extends Controller
 {
@@ -14,7 +15,7 @@ class CinemaController extends Controller
      */
     public function index()
     {
-        echo('hello world');
+        return View('cinema.index');
     }
 
     /**
@@ -46,7 +47,7 @@ class CinemaController extends Controller
      */
     public function show(Cinema $cinema)
     {
-        dd($cinema);
+        return $cinema;
     }
 
     /**
