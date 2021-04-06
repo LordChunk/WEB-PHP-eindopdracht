@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CinemaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,11 +18,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::resource('cinema', CinemaController::class);
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-route::get('/cinema','CinemaController@index')->name('cinema.index');
-route::get('/cinema/{cinema}','CinemaController@show')->name('cinema.show');
 
 require __DIR__.'/auth.php';

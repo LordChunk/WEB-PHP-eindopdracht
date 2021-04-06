@@ -15,7 +15,7 @@ class CinemaController extends Controller
      */
     public function index()
     {
-        return View();
+        return null;
     }
 
     /**
