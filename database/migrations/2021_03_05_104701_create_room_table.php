@@ -17,7 +17,7 @@ class CreateRoomTable extends Migration
             $table->id();
             $table->integer('seat_column');
             $table->integer('seat_row');
-            $table->index('cinema_id');
+            $table->foreignId('cinema_id');
 
             $table->timestamps();
         });

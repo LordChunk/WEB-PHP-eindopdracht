@@ -15,10 +15,10 @@ class CreateFestivalUserPivotTable extends Migration
     {
         Schema::create('festival_user', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('festival_id');
-            $table->unsignedBigInteger('user_id');
-            $table->timestamps('start_time');
-            $table->timestamps('end_time');
+            $table->foreignId('festival_id');
+            $table->foreignId('user_id');
+            $table->timestamp('start_time');
+            $table->timestamp('end_time');
             $table->timestamps();
         });
     }

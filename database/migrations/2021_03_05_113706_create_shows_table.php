@@ -15,10 +15,10 @@ class CreateShowsTable extends Migration
     {
         Schema::create('shows', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('movie_id');
-            $table->unsignedBigInteger('room_id');
-            $table->timestamps('start_time');
-            $table->timestamps('end_time');
+            $table->foreignId('movie_id');
+            $table->foreignId('room_id');
+            $table->timestamp('start_time');
+            $table->timestamp('end_time');
             $table->timestamps();
         });
     }
