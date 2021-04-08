@@ -6,7 +6,7 @@ use App\Models\Restaurant_type;
 use Illuminate\Database\Seeder;
 use phpDocumentor\Reflection\Type;
 
-class DatabaseSeeder extends Seeder
+class RestaurantTypeSeeder extends Seeder
 {
     /**
      * Seed the application's database.
