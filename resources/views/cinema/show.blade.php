@@ -10,8 +10,8 @@
         <p>
             {{$show->description}}
         </p>
-        <a href="{{route('cinema.show')}}">
-
+        <a href="{{route('show.show', $show->id)}}">
+            Book show
         </a>
     @endforeach
 @endsection

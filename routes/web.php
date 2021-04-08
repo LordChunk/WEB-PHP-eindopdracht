@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CinemaController;
+use App\Http\Controllers\ShowController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +20,7 @@ Route::get('/', function () {
 });
 
 Route::resource('cinema', CinemaController::class);
+Route::resource('show', ShowController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
