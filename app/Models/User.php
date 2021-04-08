@@ -44,4 +44,9 @@ class User extends Authenticatable
     public function hasTickets(){
         return $this->belongsToMany(Festival::class);
     }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
 }

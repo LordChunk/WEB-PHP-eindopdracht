@@ -3,10 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Restaurant;
-use App\Models\Restaurant_type;
-use App\Models\RestaurantType;
 use Illuminate\Database\Seeder;
-use phpDocumentor\Reflection\Type;
 
 class RestaurantSeeder extends Seeder
 {

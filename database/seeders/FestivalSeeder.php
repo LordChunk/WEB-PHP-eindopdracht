@@ -4,9 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Festival;
 use App\Models\Restaurant_type;
-use App\Models\RestaurantType;
 use Illuminate\Database\Seeder;
-use phpDocumentor\Reflection\Type;
 
 class FestivalSeeder extends Seeder
 {
