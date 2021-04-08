@@ -15,7 +15,8 @@ class CinemaController extends Controller
      */
     public function index()
     {
-        return View('cinema.index');
+        $cinemas = Cinema::all();
+        return View('cinema.index', compact('cinemas'));
     }
 
     /**

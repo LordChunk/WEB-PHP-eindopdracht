@@ -15,6 +15,8 @@ class CreateShowUserPivotTable extends Migration
     {
         Schema::create('show_user', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('show_id')->constrained();
             $table->integer('seat_column');
             $table->integer('seat_row');
             $table->timestamps();

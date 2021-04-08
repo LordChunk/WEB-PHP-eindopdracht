@@ -15,8 +15,8 @@ class CreateFestivalUserPivotTable extends Migration
     {
         Schema::create('festival_user', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('festival_id');
-            $table->foreignId('user_id');
+            $table->foreignId('festival_id')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->timestamp('start_time');
             $table->timestamp('end_time');
             $table->timestamps();
