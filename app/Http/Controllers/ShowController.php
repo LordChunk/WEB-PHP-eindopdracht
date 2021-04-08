@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cinema;
+use App\Models\show;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\View\View;
 
-class CinemaController extends Controller
+class ShowController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +14,7 @@ class CinemaController extends Controller
      */
     public function index()
     {
-        $cinemas = Cinema::all();
-        return View('cinema.index', compact('cinemas'));
+        //
     }
 
     /**
@@ -44,30 +41,21 @@ class CinemaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Cinema  $cinema
+     * @param  \App\Models\show  $show
      * @return \Illuminate\Http\Response
      */
-    public function show(Cinema $cinema)
+    public function show(show $show)
     {
-        // get all shows for cinema
-        $shows = DB::table('cinemas')
-            ->join('rooms', 'cinemas.id','=','rooms.cinema_id')
-            ->join('shows', 'rooms.id', '=', 'shows.room_id')
-            ->join('movies', 'movies.id', '=', 'shows.movie_id')
-            ->select('shows.*', 'movies.*')
-            ->distinct()
-            ->get();
-
-        return View('cinema.show', compact('shows','cinema'));
+        return view('shows.show', compact($show));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Cinema  $cinema
+     * @param  \App\Models\show  $show
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cinema $cinema)
+    public function edit(show $show)
     {
         //
     }
@@ -76,10 +64,10 @@ class CinemaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Cinema  $cinema
+     * @param  \App\Models\show  $show
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cinema $cinema)
+    public function update(Request $request, show $show)
     {
         //
     }
@@ -87,10 +75,10 @@ class CinemaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Cinema  $cinema
+     * @param  \App\Models\show  $show
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cinema $cinema)
+    public function destroy(show $show)
     {
         //
     }
