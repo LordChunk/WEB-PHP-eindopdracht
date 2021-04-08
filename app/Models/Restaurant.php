@@ -13,8 +13,8 @@ class Restaurant extends Model
     protected $fillable = ['AvailableSeats','Movies',];
     public $Reservations;
 
-    public function Restaurant_type()
+    public function restauranType()
     {
-        return $this->hasOne(Restaurant_type::class);
+        return $this->hasOne(RestaurantType::class);
     }
 }
