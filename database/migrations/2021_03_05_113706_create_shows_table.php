@@ -15,8 +15,8 @@ class CreateShowsTable extends Migration
     {
         Schema::create('shows', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('movie_id');
-            $table->foreignId('room_id');
+            $table->foreignId('movie_id')->constrained();
+            $table->foreignId('room_id')->constrained();
             $table->timestamp('start_time');
             $table->timestamp('end_time');
             $table->timestamps();
