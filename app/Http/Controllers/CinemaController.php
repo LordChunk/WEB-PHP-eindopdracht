@@ -53,13 +53,12 @@ class CinemaController extends Controller
         $shows = DB::table('cinemas')
             ->join('rooms', 'cinemas.id','=','rooms.cinema_id')
             ->join('shows', 'rooms.id', '=', 'shows.room_id')
-//            ->join('movies', 'movies.id', '=', 'shows.movie_id')
-            ->select('shows.*')
+            ->join('movies', 'movies.id', '=', 'shows.movie_id')
+            ->select('shows.*', 'movies.*')
             ->distinct()
             ->get();
-        return dd($shows);
 
-        return View('cinema.show', compact('cinema'));
+        return View('cinema.show', compact('shows','cinema'));
     }
 
     /**
