@@ -15,6 +15,9 @@ class CreateRestaurantsTable extends Migration
     {
         Schema::create('restaurants', function (Blueprint $table) {
             $table->id();
+            $table->string('location');
+            $table->string('name');
+            $table->foreignId('restaurant_type_id')->constrained('restaurant_types');
             $table->timestamps();
         });
     }

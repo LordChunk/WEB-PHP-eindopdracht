@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\RestaurantType;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,8 +16,11 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call([
+            RestaurantTypeSeeder::class,
             UserSeeder::class,
-//            RestaurantTypeSeeder::class,
+            FestivalSeeder::class,
+            CinemaSeeder::class,
+            RestaurantSeeder::class,
         ]);
     }
 }

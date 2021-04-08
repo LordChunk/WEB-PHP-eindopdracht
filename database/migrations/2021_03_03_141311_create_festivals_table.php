@@ -20,7 +20,6 @@ class CreateFestivalsTable extends Migration
             $table->integer('NumberOfTickets');
             $table->dateTime('StartDate');
             $table->dateTime('EndDate');
-            $table->foreignId('Type');
             $table->timestamps();
         });
     }
