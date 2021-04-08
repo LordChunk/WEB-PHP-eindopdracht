@@ -3,10 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\Restaurant_type;
+use App\Models\RestaurantType;
 use Illuminate\Database\Seeder;
 use phpDocumentor\Reflection\Type;
 
-class DatabaseSeeder extends Seeder
+class RestaurantTypeSeeder extends Seeder
 {
     /**
      * Seed the application's database.
@@ -15,23 +16,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Restaurant_type::create([
+        RestaurantType::create([
             'type' => 'Orientaals',
         ]);
 
-        Restaurant_type::create([
+        RestaurantType::create([
             'type' => 'Sushi',
         ]);
 
-        Restaurant_type::create([
+        RestaurantType::create([
             'type' => 'Arabisch',
         ]);
 
-        Restaurant_type::create([
+        RestaurantType::create([
             'type' => 'Italiaans ',
         ]);
 
-        Restaurant_type::create([
+        RestaurantType::create([
             'type' => 'Grieks',
         ]);
     }
