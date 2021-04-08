@@ -13,7 +13,7 @@ class CreateRestaurantTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('restaurant-types', function (Blueprint $table) {
+        Schema::create('restaurant_types', function (Blueprint $table) {
             $table->id();
             $table->string('type');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateRestaurantTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('restaurant-types');
+        Schema::dropIfExists('restaurant_types');
     }
 }
