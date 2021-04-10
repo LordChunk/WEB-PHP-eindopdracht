@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ShowReservation extends Model
 {
+    protected $fillable = ['show_id', 'user_id', 'column', 'row'];
+
     use HasFactory;
 
     public function hasUser() {

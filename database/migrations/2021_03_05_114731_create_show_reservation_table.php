@@ -17,8 +17,8 @@ class CreateShowReservationTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('show_id')->constrained();
-            $table->integer('seat_column');
-            $table->integer('seat_row');
+            $table->integer('column');
+            $table->integer('row');
             $table->timestamps();
         });
     }
