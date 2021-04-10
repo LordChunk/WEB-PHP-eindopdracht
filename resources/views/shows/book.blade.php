@@ -16,6 +16,6 @@
     @if(!$confirmed)
         <a href="{{route('show.book.confirm',  [$show, $column, $row])}}">Confirm booking</a>
     @else
-        <strong>Your booking has been saved. <a href="{{route('home')}}">Go back</a> </strong>
+        <strong>Your booking has been saved. <a href="/">Go back</a> </strong>
     @endif
 @endsection
