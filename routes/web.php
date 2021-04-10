@@ -21,6 +21,8 @@ Route::get('/', function () {
 
 Route::resource('cinema', CinemaController::class);
 Route::resource('show', ShowController::class);
+Route::get('show/{show}/book/{column}/{seat}', [ShowController::class, 'book'])
+    ->name('show.book');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
