@@ -12,16 +12,20 @@
     </p>
     <br>
     <h3><strong>Select seats:</strong></h3>
-    <div class="grid grid-cols-{{$room->seat_column + 1}} grid-gap-4">
+    <div class="grid grid-cols-{{$room->column + 1}} grid-gap-4">
         <div>
-            @for($rowNo = 0; $rowNo < $room->seat_row; $rowNo++)
+            @for($rowNo = 0; $rowNo < $room->row; $rowNo++)
                 <div><strong>Row: {{$rowNo}}</strong></div>
             @endfor
         </div>
-        @for($colNo = 0; $colNo < $room->seat_column; $colNo++)
-            <div>
-            @for($rowNo = 0; $rowNo < $room->seat_row; $rowNo++)
-                <div><a href="{{route('show.book', [$show, $colNo, $rowNo])}}">{{$colNo}}</a></div>
+        @for($colNo = 0; $colNo < $room->column; $colNo++)
+            <div class="text-center">
+            @for($rowNo = 0; $rowNo < $room->row; $rowNo++)
+                @if(!isset($blockedSeats[$colNo][$rowNo]))
+                   <a class="block bg-green-300" href="{{route('show.book', [$show, $colNo, $rowNo])}}">{{$colNo}}</a>
+                @else
+                    <div class="bg-gray-600">&nbsp;</div>
+                @endif
             @endfor
             </div>
         @endfor

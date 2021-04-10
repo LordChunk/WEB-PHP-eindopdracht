@@ -15,8 +15,8 @@ class CreateRoomsTable extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
-            $table->integer('seat_column');
-            $table->integer('seat_row');
+            $table->integer('column');
+            $table->integer('row');
             $table->foreignId('cinema_id')->constrained();
 
             $table->timestamps();

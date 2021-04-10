@@ -56,7 +56,27 @@ class ShowController extends Controller
             ->where('rooms.id', '=', $show->room_id)
             ->first();
 
-        return view('shows.show', compact('show', 'movie', 'room'));
+        $reservedSeats = DB::table('show_reservations')
+            ->select('show_reservations.column', 'show_reservations.row')
+            ->where('show_reservations.show_id', '=', $show->id)
+            ->get();
+
+        $blockedSeats = [];
+        for ($i = 0; $i > $room->column; $i++) {
+            $blockedSeats[$i] = [];
+        }
+
+        foreach ($reservedSeats as $reservedSeat) {
+            if($reservedSeat->column > 0) {
+                $blockedSeats[$reservedSeat->column - 1][$reservedSeat->row] = true;
+            }
+            $blockedSeats[$reservedSeat->column][$reservedSeat->row] = true;
+            if($reservedSeat->column < $room->column) {
+                $blockedSeats[$reservedSeat->column + 1][$reservedSeat->row] = true;
+            }
+        }
+
+        return view('shows.show', compact('show', 'movie', 'room', 'blockedSeats'));
     }
 
     /**
