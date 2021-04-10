@@ -16,7 +16,7 @@ class CreateMoviesTable extends Migration
         Schema::create('movies', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('movieName');
+            $table->string('name');
             $table->text('description');
         });
     }
