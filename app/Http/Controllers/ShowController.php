@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\show;
+use App\Models\ShowReservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -48,7 +49,7 @@ class ShowController extends Controller
      */
     public function show(show $show)
     {
-        $movie = GetMovieFromId($show->movie_id);
+        $movie = $this->getMovieFromId($show->movie_id);
 
         $room = DB::table('rooms')
             ->select('rooms.*')
@@ -123,7 +124,12 @@ class ShowController extends Controller
 
         $userId = Auth::user()->getAuthIdentifier();
 
-        return $show->showReservations()->get();
+        ShowReservation::create([
+            'show_id' => $show->id,
+            'user_id' => $userId,
+            'column' => $column,
+            'row' => $row,
+        ]);
 
         return view('shows.book', compact('show', 'movie', 'column', 'row', 'confirmed'));
     }
