@@ -5,7 +5,7 @@
 @section('content')
     <h4>Shows:</h4>
     @foreach($shows as $show)
-        <strong><h5>{{$show->movieName}}</h5></strong>
+        <strong><h5>{{$show->name}}</h5></strong>
         <strong>Shown at: {{\Carbon\Carbon::parse($show->start_time)->format('D H:i')}}</strong>
         <p>
             {{$show->description}}

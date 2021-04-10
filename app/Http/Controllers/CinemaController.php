@@ -51,6 +51,7 @@ class CinemaController extends Controller
     {
         // get all shows for cinema
         $shows = DB::table('cinemas')
+            ->where('cinemas.id', '=', $cinema->id)
             ->join('rooms', 'cinemas.id','=','rooms.cinema_id')
             ->join('shows', 'rooms.id', '=', 'shows.room_id')
             ->join('movies', 'movies.id', '=', 'shows.movie_id')

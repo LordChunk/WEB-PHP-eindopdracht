@@ -20,6 +20,9 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             FestivalSeeder::class,
             CinemaSeeder::class,
+            RoomSeeder::class,
+            MovieSeeder::class,
+            ShowSeeder::class,
             RestaurantSeeder::class,
         ]);
     }

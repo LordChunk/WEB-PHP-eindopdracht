@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\show;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ShowController extends Controller
 {
@@ -46,7 +47,17 @@ class ShowController extends Controller
      */
     public function show(show $show)
     {
-        return view('shows.show', compact($show));
+        $movie = DB::table('movies')
+            ->select('movies.*')
+            ->where('movies.id', '=', $show->movie_id)
+            ->first();
+
+        $room = DB::table('rooms')
+            ->select('rooms.*')
+            ->where('rooms.id', '=', $show->room_id)
+            ->first();
+
+        return view('shows.show', compact('show', 'movie', 'room'));
     }
 
     /**
@@ -82,4 +93,23 @@ class ShowController extends Controller
     {
         //
     }
+
+    /**
+     * Books a show.
+     *
+     * @param  \App\Models\show  $show
+     * @param int $column
+     * @param int $row
+     * @return \Illuminate\Http\Response
+     */
+    public function book(show $show, int $column, int $row)
+    {
+        $movie = DB::table('movies')
+            ->select('movies.*')
+            ->where('movies.id', '=', $show->movie_id)
+            ->first();
+
+        return view('shows.book', compact('show', 'movie', 'column', 'row'));
+    }
+
 }
