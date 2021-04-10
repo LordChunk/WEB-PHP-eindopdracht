@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cinema;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
@@ -51,10 +52,11 @@ class CinemaController extends Controller
     {
         // get all shows for cinema
         $shows = DB::table('cinemas')
-            ->where('cinemas.id', '=', $cinema->id)
             ->join('rooms', 'cinemas.id','=','rooms.cinema_id')
             ->join('shows', 'rooms.id', '=', 'shows.room_id')
             ->join('movies', 'movies.id', '=', 'shows.movie_id')
+            ->where('cinemas.id', '=', $cinema->id)
+            ->where('shows.start_time', '>=', Carbon::now())
             ->select('shows.*', 'movies.*')
             ->distinct()
             ->get();
