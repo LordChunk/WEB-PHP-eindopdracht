@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateShowUserPivotTable extends Migration
+class CreateShowReservationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateShowUserPivotTable extends Migration
      */
     public function up()
     {
-        Schema::create('show_user', function (Blueprint $table) {
+        Schema::create('show_reservations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('show_id')->constrained();
@@ -30,6 +30,6 @@ class CreateShowUserPivotTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('show_user');
+        Schema::dropIfExists('show_reservations');
     }
 }

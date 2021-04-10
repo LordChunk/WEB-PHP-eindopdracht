@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\show;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ShowController extends Controller
@@ -47,10 +48,7 @@ class ShowController extends Controller
      */
     public function show(show $show)
     {
-        $movie = DB::table('movies')
-            ->select('movies.*')
-            ->where('movies.id', '=', $show->movie_id)
-            ->first();
+        $movie = GetMovieFromId($show->movie_id);
 
         $room = DB::table('rooms')
             ->select('rooms.*')
@@ -95,7 +93,7 @@ class ShowController extends Controller
     }
 
     /**
-     * Books a show.
+     * Preview a booking.
      *
      * @param  \App\Models\show  $show
      * @param int $column
@@ -104,12 +102,36 @@ class ShowController extends Controller
      */
     public function book(show $show, int $column, int $row)
     {
-        $movie = DB::table('movies')
-            ->select('movies.*')
-            ->where('movies.id', '=', $show->movie_id)
-            ->first();
+        $movie = $this->getMovieFromId($show->movie_id);
+        $confirmed = false;
 
-        return view('shows.book', compact('show', 'movie', 'column', 'row'));
+        return view('shows.book', compact('show', 'movie', 'column', 'row', 'confirmed'));
     }
 
+    /**
+     * Confirm a booking.
+     *
+     * @param  \App\Models\show  $show
+     * @param int $column
+     * @param int $row
+     * @return \Illuminate\Http\Response
+     */
+    public function bookConfirm(show $show, int $column, int $row)
+    {
+        $movie = $this->getMovieFromId($show->movie_id);
+        $confirmed = true;
+
+        $userId = Auth::user()->getAuthIdentifier();
+
+        return $show->showReservations()->get();
+
+        return view('shows.book', compact('show', 'movie', 'column', 'row', 'confirmed'));
+    }
+
+    private function getMovieFromId(int $id) {
+        return DB::table('movies')
+            ->select('movies.*')
+            ->where('movies.id', '=', $id)
+            ->first();
+    }
 }

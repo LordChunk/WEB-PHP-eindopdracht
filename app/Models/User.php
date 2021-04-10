@@ -45,6 +45,10 @@ class User extends Authenticatable
         return $this->belongsToMany(Festival::class);
     }
 
+    public function showReservations() {
+        return $this->hasMany(ShowReservation::class);
+    }
+
     public function role()
     {
         return $this->belongsTo(Role::class);

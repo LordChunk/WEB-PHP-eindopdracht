@@ -16,4 +16,8 @@ class Show extends Model
     public function room(){
         return $this->belongsTo(Room::class);
     }
+
+    public function showReservations() {
+        return $this->hasMany(ShowReservation::class);
+    }
 }

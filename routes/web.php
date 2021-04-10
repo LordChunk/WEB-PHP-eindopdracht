@@ -22,7 +22,12 @@ Route::get('/', function () {
 Route::resource('cinema', CinemaController::class);
 Route::resource('show', ShowController::class);
 Route::get('show/{show}/book/{column}/{seat}', [ShowController::class, 'book'])
+    ->middleware(['auth'])
     ->name('show.book');
+
+Route::get('show/{show}/book/{column}/{seat}/confirm', [ShowController::class, 'bookConfirm'])
+    ->middleware(['auth'])
+    ->name('show.book.confirm');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
