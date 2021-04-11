@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('header')
-    <h1 class="font-weight-bold">{{__('Selected Festival:')}} {{$festivalTicketUser->hasFestival->name}}</h1>
+    <h1 class="font-weight-bold">{{__('Bought ticket')}}</h1>
 @endsection
 @section('content')
     <p>

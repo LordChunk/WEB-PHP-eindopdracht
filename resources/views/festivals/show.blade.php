@@ -2,7 +2,7 @@
 @section('header')
     <h1>{{__('Selected Festival:')}} {{$festival->name}}</h1>
 
-    <a class="btn-primary btn" href="{{route('festivalticketusers.create', $festival)}}">
+    <a class="btn-primary btn" href="{{route('festivalticketusers.buytickets', $festival)}}">
         {{__('Buy tickets!')}}
     </a>
 @endsection

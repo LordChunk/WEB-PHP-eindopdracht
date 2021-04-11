@@ -3,17 +3,17 @@
     <h1 class="font-weight-bold">{{__('Selected Festival:')}} {{$festival->name}}</h1>
 @endsection
 @section('content')
-    <form action="{{route('festivalticketusers.store')}}" method="post">
+    <form action="{{route('festivalticketusers.storetickets', $festival)}}" method="post">
         @csrf
 
         <div>
             <label for="number_of_tickets" class="col-form-label">{{__('Number of tickets')}}:</label>
 
             <input type="number"
-                   class="form-control @error('name') is-invalid @enderror" name="number_of_tickets"
+                   class="form-control @error('number_of_tickets') is-invalid @enderror" name="number_of_tickets"
                    value="{{ old('number_of_tickets') }}" autofocus required>
 
-            @error('name')
+            @error('number_of_tickets')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
@@ -35,7 +35,7 @@
                 </option>
             </select>
 
-            @error('name')
+            @error('start_day')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
@@ -57,7 +57,7 @@
                 </option>
             </select>
 
-            @error('name')
+            @error('end_day')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
@@ -69,7 +69,7 @@
 
             <input type="file" name="file" required>
 
-            @error('name')
+            @error('photo')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>

@@ -20,37 +20,33 @@ class FestivalTicketUserController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Festival $festival)
+    public function buyTickets(Festival $festival)
     {
         return view('festivalticketusers.create', compact('festival'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function storeTickets(Request $request)
     {
         $data = $request->validate([
-            'photo' => ['required',' mimetypes:jpeg,bmp,png'],
+            'photo' => ['image'],
             'number_of_tickets' => ['required', 'max:4'],
-            'start_day' => ['required', 'ite:end_day'],
+            'start_day' => ['required', 'lte:end_day'],
             'end_day' => ['required'],
+            'festival_id',
+            'user_id',
         ]);
 
-        $data->festival_id = $request->festival_id;
-        $data->user_id = Auth::user()->getAuthIdentifier()->id;
+        $festivalTicketUser = FestivalTicketUser::create([
+            'photo' => $request->photo,
+            'number_of_tickets' => $request->number_of_tickets,
+            'start_day' => $request->start_day,
+            'end_day' => $request->end_day,
+            'festival_id' => $request->festival_id,
+            'user_id' => Auth::user()->getAuthIdentifier(),
+        ]);
 
-        $festivalTicketUser = FestivalTicketUser::create($data);
-
-        return redirect()->route('customers.show', $festivalTicketUser);
+        return view('festivalticketusers.show', compact('festivalTicketUser'));
+        //return redirect()->route('festivalticketusers.show', $festivalTicketUser);
     }
 
     /**
@@ -59,8 +55,9 @@ class FestivalTicketUserController extends Controller
      * @param FestivalTicketUser $festivalTicketUser
      * @return \Illuminate\Http\Response
      */
-    public function show(FestivalTicketUser $festivalTicketUser)
+    public function showTicket(FestivalTicketUser $festivalTicketUser)
     {
+        dd($festivalTicketUser);
         return view('festivalticketusers.show', compact('festivalTicketUser'));
     }
 
