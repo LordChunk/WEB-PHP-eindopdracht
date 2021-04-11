@@ -22,6 +22,10 @@ Route::get('/', function () {
     return view('home');
 })->name('dashboard');
 
+Route::get('/dashboard', function () {
+    return redirect('/');
+});
+
 Route::resource('festivals', FestivalController::class);
 Route::resource('restaurants', RestaurantController::class);
 Route::resource('cinema', CinemaController::class);
@@ -34,5 +38,7 @@ Route::get('show/{show}/book/{column}/{seat}', [ShowController::class, 'book'])
 Route::get('show/{show}/book/{column}/{seat}/confirm', [ShowController::class, 'bookConfirm'])
     ->middleware(['auth'])
     ->name('show.book.confirm');
+
+
 
 require __DIR__.'/auth.php';
