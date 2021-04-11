@@ -18,6 +18,9 @@ class CreateRestaurantsTable extends Migration
             $table->string('location');
             $table->string('name');
             $table->foreignId('restaurant_type_id')->constrained('restaurant_types');
+            $table->time('opens_at');
+            $table->time('closes_at');
+            $table->unsignedInteger('seats_available');
             $table->timestamps();
         });
     }
