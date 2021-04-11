@@ -19,7 +19,8 @@ class ExampleTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
-                    ->assertSee('Show restaurants');
+                    ->assertSee('Show restaurants')
+                    ->assertSee('Show festivals and cinemas');
         });
     }
 
@@ -32,7 +33,16 @@ class ExampleTest extends DuskTestCase
         });
     }
 
-    public function testRestaurantShowFromHomePage()
+    public function testOrderablesIndexFromHomePage()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/')
+                ->clickLink('Show festivals and cinemas')
+                ->assertSee('All Orderables');
+        });
+    }
+
+    public function testRestaurantShow()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/restaurants')
@@ -41,7 +51,7 @@ class ExampleTest extends DuskTestCase
         });
     }
 
-    public function testCinemaIndexFromHomePage()
+    public function testCinemaIndex()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/cinema')
@@ -49,12 +59,47 @@ class ExampleTest extends DuskTestCase
         });
     }
 
-    public function testCinemaShowFromHomePage()
+    public function testCinemaIndexFromOrderables()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/orderables')
+                ->clickLink('filter cinemas')
+                ->assertSee('All Cinemas');
+        });
+    }
+
+    public function testCinemaShow()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/cinema')
-                ->clickLink('Vue Eindhoven')
-                ->assertSee('Vue');
+                ->clickLink('Vue')
+                ->assertSee('Selected Cinema');
+        });
+    }
+
+    public function testFestivalIndex()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/festivals')
+                ->assertSee('Wildeburg');
+        });
+    }
+
+    public function testFestivalIndexFromOrderables()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/orderables')
+                ->clickLink('filter festivals')
+                ->assertSee('All Festivals');
+        });
+    }
+
+    public function testFestivalShow()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/festivals')
+                ->clickLink('Wildeburg')
+                ->assertSee('Selected Festival');
         });
     }
 }
