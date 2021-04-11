@@ -64,14 +64,7 @@ class RestaurantController extends Controller
             ->get();
 
         // Set correct time
-        $time = Carbon::now()->setSecond(0)->floorSecond(); //floor second takes care of milli- and microseconds
-
-        // Get closest half hour
-        if($time->minute <= 30) {
-            $time->addMinutes(30 - $time->minute);
-        } else {
-            $time->addMinutes(60 - $time->minute);
-        }
+        $time = $this->GetClosestHalfHour(Carbon::now());
 
         // Remove fully booked time slots                    // Adjust for current timezone because Carbon can't just ignore timezones all together
         while ($time < Carbon::parse($restaurant->closes_at)->addHours(2)->addMinutes(-30)) {
@@ -90,7 +83,6 @@ class RestaurantController extends Controller
                     array_push($availableTimeSlots, $time->toTimeString('minute'));
                 }
             }
-//            dd($time);
 
             if(!$foundOverlapping) {
                 array_push($availableTimeSlots, $time->toTimeString('minute'));
@@ -172,5 +164,19 @@ class RestaurantController extends Controller
         ]);
 
         return back();
+    }
+
+    public static function GetClosestHalfHour(Carbon $time) {
+        // Set correct time
+        $time->setSecond(0)->floorSecond(); //floor second takes care of milli- and microseconds
+
+        // Get closest half hour
+        if($time->minute <= 30) {
+            $time->addMinutes(30 - $time->minute);
+        } else {
+        $time->addMinutes(60 - $time->minute);
+        }
+
+        return $time;
     }
 }
