@@ -75,6 +75,9 @@ class RestaurantController extends Controller
 
         // Remove fully booked time slots                    // Adjust for current timezone because Carbon can't just ignore timezones all together
         while ($time < Carbon::parse($restaurant->closes_at)->addHours(2)->addMinutes(-30)) {
+            // Stop if restaurant is already closed for today
+            if(Carbon::parse($restaurant->closes_at)->isBefore($time)) break;
+
             $foundOverlapping = false;
             foreach ($timeSlots as $timeSlot) {
                 // Check if timeslot is the same as the current timeslot we're looking for
