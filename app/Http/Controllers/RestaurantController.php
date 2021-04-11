@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Restaurant;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -50,11 +51,15 @@ class RestaurantController extends Controller
     {
         $availableTimeSlots = [];
 
-        $reservations = DB::table('restaurant_reservations')
-            ->where('restaurant_reservations.restaurant_id', '=', $restaurant->id)
+        $guestsPerTimeSlot =
+            DB::table('restaurant_reservations')
+            ->select(DB::raw('time_slot, sum(guests) as guest_count'))
+            ->where('restaurant_id', '=', $restaurant->id)
+            ->where('time_slot', '>', Carbon::now())
+            ->groupBy('time_slot')
             ->get();
 
-        return $reservations;
+        // Remove fully booked time slots
 
         return view('restaurants.show', compact('restaurant'));
     }
