@@ -1,6 +1,9 @@
 @extends('layouts.app')
 @section('header')
     <h1>All Cinemas</h1>
+    <a href="{{route('orderables.index')}}" class="btn btn-primary">
+        back to list
+    </a>
 @endsection
 @section('content')
     @foreach($cinemas as $cinema)
