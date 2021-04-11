@@ -12,7 +12,7 @@ class RestaurantTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
-                ->clickLink('Show restaurants')
+                ->clickLink('Restaurants')
                 ->assertSee('All Restaurants');
         });
     }
@@ -23,6 +23,15 @@ class RestaurantTest extends DuskTestCase
             $browser->visit('/restaurants')
                 ->clickLink('De Lindehof')
                 ->assertSee('Selected Restaurant');
+        });
+    }
+
+    public function testFestivalBuy()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/restaurants')
+                ->clickLink('De Lindehof')
+                ->assertSee('Information');
         });
     }
 }

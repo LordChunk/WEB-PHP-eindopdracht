@@ -12,7 +12,7 @@ class OrderableTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
-                ->clickLink('Show festivals and cinemas')
+                ->clickLink('Festivals & Cinemas')
                 ->assertSee('All Orderables');
         });
     }

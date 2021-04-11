@@ -33,4 +33,14 @@ class FestivalTest extends DuskTestCase
                 ->assertSee('Selected Festival');
         });
     }
+
+    public function testFestivalBuy()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/festivals')
+                ->clickLink('Wildeburg')
+                ->clickLink('Buy tickets')
+                ->assertSee('Email');
+        });
+    }
 }

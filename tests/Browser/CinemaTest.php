@@ -33,4 +33,15 @@ class CinemaTest extends DuskTestCase
                 ->assertSee('Selected Cinema');
         });
     }
+
+    public function testCinemaBuy()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/cinema')
+                ->clickLink('Vue')
+                ->clickLink('Book show')
+                ->clickLink('3')
+                ->assertSee('Email');
+        });
+    }
 }
