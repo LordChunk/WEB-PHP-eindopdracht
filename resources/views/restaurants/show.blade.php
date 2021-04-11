@@ -11,7 +11,7 @@
     </p>
 
     @if(sizeof($availableTimeSlots) === 0)
-        <p>Reservations for this restaurant are currently disabled. Please come back later.</p>
+        <p><strong>Reservations for this restaurant are currently closed.</strong><br> Please come back later.</p>
     @else
 
         @guest
