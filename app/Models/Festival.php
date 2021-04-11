@@ -10,7 +10,7 @@ class Festival extends Model
 {
     use HasFactory;
 
-    public function visitors(){
-        return $this->belongsToMany(User::class);
+    public function festivalTickets() {
+        return $this->hasMany(FestivalTicketUser::class);
     }
 }

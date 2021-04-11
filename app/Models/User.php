@@ -42,7 +42,7 @@ class User extends Authenticatable
     ];
 
     public function hasTickets(){
-        return $this->belongsToMany(Festival::class);
+        return $this->hasMany(FestivalTicketUser::class);
     }
 
     public function showReservations() {

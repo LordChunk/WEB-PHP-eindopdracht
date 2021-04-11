@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('header')
-    <h1>All Festivals</h1>
+    <h1>{{__('All Festivals')}}</h1>
     <a href="{{route('orderables.index')}}" class="btn btn-primary">
-        back to list
+        {{__('back to list')}}
     </a>
 @endsection
 @section('content')

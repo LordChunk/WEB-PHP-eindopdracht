@@ -39,6 +39,10 @@ Route::get('show/{show}/book/{column}/{seat}/confirm', [ShowController::class, '
     ->middleware(['auth'])
     ->name('show.book.confirm');
 
+Route::get('festivals/{show}/buy', [FestivalController::class, 'buy'])
+    ->middleware(['auth'])
+    ->name('festivals.buy');
+
 
 
 require __DIR__.'/auth.php';
