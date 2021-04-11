@@ -50,4 +50,16 @@ Route::post('restaurants/{id}/reserve', [RestaurantController::class, 'makeReser
     ->middleware(['auth'])
     ->name('restaurants.makereservation');
 
+Route::get('/festivalticketusers/{festival}/create',[FestivalTicketUserController::class, 'buyTickets'])
+    ->middleware(['auth'])
+    ->name('festivalticketusers.buytickets');
+
+Route::post('/festivalticketusers/{festival}/storetickets', [FestivalTicketUserController::class, 'storeTickets'])
+    ->middleware(['auth'])
+    ->name('festivalticketusers.storetickets');
+
+Route::get('/festivalticketusers/{festivalticketuser}', [FestivalTicketUserController::class, 'show'])
+    ->middleware(['auth'])
+    ->name('festivalticketusers.show');
+
 require __DIR__.'/auth.php';
