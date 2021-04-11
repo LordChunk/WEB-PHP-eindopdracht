@@ -45,8 +45,8 @@ class FestivalTicketUserController extends Controller
             'user_id' => Auth::user()->getAuthIdentifier(),
         ]);
 
-        return view('festivalticketusers.show', compact('festivalTicketUser'));
-        //return redirect()->route('festivalticketusers.show', $festivalTicketUser);
+        //return view('festivals.index', $request->festival_id);
+        return redirect()->route('festivalticketusers.show', $festivalTicketUser);
     }
 
     /**
@@ -55,9 +55,8 @@ class FestivalTicketUserController extends Controller
      * @param FestivalTicketUser $festivalTicketUser
      * @return \Illuminate\Http\Response
      */
-    public function showTicket(FestivalTicketUser $festivalTicketUser)
+    public function show(FestivalTicketUser $festivalTicketUser)
     {
-        dd($festivalTicketUser);
         return view('festivalticketusers.show', compact('festivalTicketUser'));
     }
 
