@@ -12,6 +12,8 @@
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
+            <h2>General account information</h2>
+            <br>
             <!-- Name -->
             <div>
                 <x-label for="name" :value="__('Name')" />
@@ -43,6 +45,44 @@
                 <x-input id="password_confirmation" class="block mt-1 w-full"
                                 type="password"
                                 name="password_confirmation" required />
+            </div>
+
+            <br>
+            <h2>Billing information</h2>
+            <!-- Street name -->
+            <div class="mt-4">
+                <x-label for="street" :value="__('Street name')" />
+
+                <x-input id="street" class="block mt-1 w-full"
+                         type="text"
+                         name="street" required />
+            </div>
+
+            <!-- House number -->
+            <div class="mt-4">
+                <x-label for="house_number" :value="__('House number')" />
+
+                <x-input id="house_number" class="block mt-1 w-full"
+                         type="number"
+                         name="house_number" required />
+            </div>
+
+            <!-- postcode -->
+            <div class="mt-4">
+                <x-label for="postcode" :value="__('Postcode')" />
+
+                <x-input id="postcode" class="block mt-1 w-full"
+                         type="text"
+                         name="postcode" required />
+            </div>
+
+            <!-- country -->
+            <div class="mt-4">
+                <x-label for="country" :value="__('Country')" />
+
+                <x-input id="country" class="block mt-1 w-full"
+                         type="text"
+                         name="country" required />
             </div>
 
             <div class="flex items-center justify-end mt-4">

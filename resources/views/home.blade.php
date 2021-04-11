@@ -2,13 +2,8 @@
 
 @section('content')
 
-    <a href="{{route('restaurants.index')}}" class="btn btn-primary">
-        <p>Show restaurants</p>
-    </a>
+    <h1>Welcome to the <strong>R E S E R V E E R </strong> M E N E E R!</h1>
 
-    <a href="{{route('orderables.index')}}" class="btn btn-primary">
-        <p>Show festivals and cinemas</p>
-    </a>
-
+    <p>Please use the links at the top of your screen to select for which service you would like to make a reservation! 😁</p>
 @endsection
 
