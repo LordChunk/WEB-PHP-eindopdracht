@@ -51,15 +51,48 @@ class RestaurantController extends Controller
     {
         $availableTimeSlots = [];
 
-        $guestsPerTimeSlot =
+        $timeSlots =
             DB::table('restaurant_reservations')
-            ->select(DB::raw('time_slot, sum(guests) as guest_count'))
+            ->select(DB::raw('time_slot, sum(guests) as guest_count, count(*) as reservation_count'))
             ->where('restaurant_id', '=', $restaurant->id)
             ->where('time_slot', '>', Carbon::now())
             ->groupBy('time_slot')
+            ->orderBy('time_slot')
             ->get();
 
-        // Remove fully booked time slots
+        // Set correct time
+        $time = Carbon::now()->setSecond(0)->floorSecond(); //floor second takes care of milli- and microseconds
+
+        // Get closest half hour
+        if($time->minute <= 30) {
+            $time->addMinutes(30 - $time->minute);
+        } else {
+            $time->addMinutes(60 - $time->minute);
+        }
+
+        // Remove fully booked time slots                    // Adjust for current timezone because Carbon can't just ignore timezones all together
+        while ($time < Carbon::parse($restaurant->closes_at)->addHours(2)->addMinutes(-30)) {
+            $foundOverlapping = false;
+            foreach ($timeSlots as $timeSlot) {
+                // Check if timeslot is the same as the current timeslot we're looking for
+                $carbonTimeStamp = Carbon::parse($timeSlot->time_slot)->toString();
+                if($carbonTimeStamp !== $time->toString()) continue;
+                $foundOverlapping = true;
+                // Check if not all seats are booked and if there are no more than 10 reservations
+                if ($timeSlot->guest_count-0 < $restaurant->seats_available && $timeSlot->reservation_count < 10) {
+                    // Add item to available time slots
+                    array_push($availableTimeSlots, $time->toTimeString('minute'));
+                }
+            }
+
+            if(!$foundOverlapping) {
+                array_push($availableTimeSlots, $time->toTimeString('minute'));
+            }
+
+            $time = $time->addMinutes(30);
+        }
+
+        return [$availableTimeSlots, $timeSlots];
 
         return view('restaurants.show', compact('restaurant'));
     }
