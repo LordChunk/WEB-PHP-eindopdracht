@@ -46,6 +46,8 @@ Route::get('festivals/{show}/buy', [FestivalController::class, 'buy'])
     ->middleware(['auth'])
     ->name('festivals.buy');
 
-
+Route::post('restaurants/{id}/reserve', [RestaurantController::class, 'makeReservation'])
+    ->middleware(['auth'])
+    ->name('restaurants.makereservation');
 
 require __DIR__.'/auth.php';
