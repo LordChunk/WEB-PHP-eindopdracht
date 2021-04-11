@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('header')
-    <h1 class="font-weight-bold">{{__('Selected Festival:')}} {{$festivals->name}}</h1>
+    <h1 class="font-weight-bold">{{__('Selected Festival:')}} {{$festival->name}}</h1>
 @endsection
 @section('content')
-    <form action="{{route('customers.store')}}" method="post">
+    <form action="#" method="post">
         @csrf
 
         <div>
