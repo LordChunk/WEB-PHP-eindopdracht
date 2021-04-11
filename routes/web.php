@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('dashboard');
 
 Route::resource('festivals', FestivalController::class);
 Route::resource('restaurants', RestaurantController::class);
@@ -34,10 +34,5 @@ Route::get('show/{show}/book/{column}/{seat}', [ShowController::class, 'book'])
 Route::get('show/{show}/book/{column}/{seat}/confirm', [ShowController::class, 'bookConfirm'])
     ->middleware(['auth'])
     ->name('show.book.confirm');
-
-Route::get('/dashboard', function () {
-    return view('home');
-})->middleware(['auth'])->name('dashboard');
-
 
 require __DIR__.'/auth.php';
