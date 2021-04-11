@@ -14,7 +14,7 @@ class FestivalController extends Controller
      */
     public function index()
     {
-        $festivals = Customer::all();
+        $festivals = Festival::all();
         return view('festivals.index', compact('festivals'));
     }
 

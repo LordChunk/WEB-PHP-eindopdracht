@@ -6,6 +6,7 @@
     @foreach($cinemas as $cinema)
         <p><h3>
             <a href="{{route('cinema.show', $cinema)}}">
+                {{$cinema->name}}
                 {{$cinema->location}}
             </a>
         </h3></p>
