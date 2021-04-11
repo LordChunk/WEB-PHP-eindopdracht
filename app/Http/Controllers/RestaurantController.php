@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Restaurant;
+use App\Models\RestaurantReservation;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -47,7 +50,7 @@ class RestaurantController extends Controller
      * @param  \App\Models\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
-    public function show(Restaurant $restaurant)
+    public function show(Restaurant $restaurant, bool $created = false)
     {
         $availableTimeSlots = [];
 
@@ -72,6 +75,9 @@ class RestaurantController extends Controller
 
         // Remove fully booked time slots                    // Adjust for current timezone because Carbon can't just ignore timezones all together
         while ($time < Carbon::parse($restaurant->closes_at)->addHours(2)->addMinutes(-30)) {
+            // Stop if restaurant is already closed for today
+            if(Carbon::parse($restaurant->closes_at)->isBefore($time)) break;
+
             $foundOverlapping = false;
             foreach ($timeSlots as $timeSlot) {
                 // Check if timeslot is the same as the current timeslot we're looking for
@@ -92,9 +98,7 @@ class RestaurantController extends Controller
             $time = $time->addMinutes(30);
         }
 
-        return [$availableTimeSlots, $timeSlots];
-
-        return view('restaurants.show', compact('restaurant'));
+        return view('restaurants.show', compact('restaurant', 'availableTimeSlots'));
     }
 
     /**
@@ -129,5 +133,43 @@ class RestaurantController extends Controller
     public function destroy(Restaurant $restaurant)
     {
         //
+    }
+
+    public function makeReservation(Request $request) {
+        $validated = $request->validate([
+            'guest_count' => 'required|min:1', // <- min doesn't seem to work here 🤷
+            'time' => 'required',
+            'restaurant_id' => 'required'
+        ]);
+
+        if($validated['guest_count'] < 1) {
+            throw ValidationException::withMessages(['guest_count' => 'You need to have make a reservation for at least 1 guest.']);
+        }
+
+        $carbonTime = Carbon::parse($validated['time'])->toISOString(true);
+
+        $bookedSeats =
+            DB::table('restaurant_reservations')
+            ->select('*')
+            ->where('restaurant_id', '=', $validated['restaurant_id'])
+            ->where('time_slot', '=', $carbonTime)
+            ->sum('guests');
+
+        $availableSeats = DB::table('restaurants')
+            ->where('id', '=', $validated['restaurant_id'])
+            ->sum('seats_available');
+
+        if($bookedSeats + $validated['guest_count'] > $availableSeats) {
+            throw ValidationException::withMessages(['guest_count' => 'There were not enough seats available for your reservation. There are currently '.$availableSeats-$bookedSeats.' seats available.']);
+        }
+
+        RestaurantReservation::create([
+            'restaurant_id' => $validated['restaurant_id'],
+            'user_id' => Auth::user()->getAuthIdentifier(),
+            'time_slot' => $carbonTime,
+            'guests' => $validated['guest_count'],
+        ]);
+
+        return back();
     }
 }

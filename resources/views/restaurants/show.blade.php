@@ -10,24 +10,44 @@
         Closes at: {{\Carbon\Carbon::parse($restaurant->closes_at)->format('H:i')}}
     </p>
 
+    @if(sizeof($availableTimeSlots) === 0)
+        <p>Reservations for this restaurant are currently disabled. Please come back later.</p>
+    @else
 
-    @guest
-        <a href="/login">Login to make a reservation</a>
-    @endguest
+        @guest
+            <a href="/login">Login to make a reservation</a>
+        @endguest
 
-    @auth
-        <h2 class="font-weight-bold">Make a reservation</h2>
-        <form action="">
-            <p>
-                <label for="guest_count">Number of guests</label><br>
-                <input type="number" id="guest_count" name="guest_count">
-            </p>
-            <p>
-                <label for="time">Time of reservation</label><br>
-                <select name="time" id="time"></select>
-            </p>
+        @auth
+            <h2 class="font-weight-bold">Make a reservation</h2>
+            <form action="{{route('restaurants.makereservation', $restaurant)}}" method="post">
+                @csrf
 
-            <button type="submit" class="btn btn-primary">Submit order</button>
-        </form>
-    @endauth
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        @foreach ($errors->all() as $error)
+                            <p>{{ $error }}</p>
+                        @endforeach
+                    </div>
+                @endif
+
+                <p>
+                    <label for="guest_count">Number of guests</label><br>
+                    <input type="number" id="guest_count" name="guest_count" required>
+                </p>
+                <p>
+                    <label for="time">Time of reservation</label><br>
+                    <select name="time" id="time" required>
+                    @foreach($availableTimeSlots as $timeslot)
+                        <option value="{{$timeslot}}">{{$timeslot}}</option>
+                    @endforeach
+                    </select>
+                </p>
+
+                <input type="hidden" name="restaurant_id" value="{{$restaurant->id}}">
+
+                <button type="submit" class="btn btn-primary">Submit order</button>
+            </form>
+        @endauth
+    @endif
 @endsection
