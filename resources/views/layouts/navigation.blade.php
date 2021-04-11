@@ -23,7 +23,11 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
-{{--                            <div>{{ Auth::user()->name }}</div>--}}
+                            @if(\Illuminate\Support\Facades\Auth::check())
+                            <div>{{ Auth::user()->name }}</div>
+                            @else
+                            <div>Welcome!</div>
+                            @endif
 
                             <div class="ml-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -35,15 +39,25 @@
 
                     <x-slot name="content">
                         <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
+                        @if(\Illuminate\Support\Facades\Auth::check())
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
 
-                            <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
+                                <x-dropdown-link :href="route('logout')"
+                                                 onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log out') }}
+                                    {{ __('Log out') }}
+                                </x-dropdown-link>
+                            </form>
+                        @else
+                            <x-dropdown-link :href="route('login')">
+                                {{ __('Login') }}
                             </x-dropdown-link>
-                        </form>
+                            <x-dropdown-link :href="route('register')">
+                                {{ __('Register') }}
+                            </x-dropdown-link>
+                        @endif
+
                     </x-slot>
                 </x-dropdown>
             </div>
@@ -78,22 +92,33 @@
                 </div>
 
                 <div class="ml-3">
-{{--                    <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>--}}
-{{--                    <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>--}}
+                    @if(\Illuminate\Support\Facades\Auth::check())
+                        <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
+                        <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                    @endif
                 </div>
             </div>
 
             <div class="mt-3 space-y-1">
                 <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
+                @if(\Illuminate\Support\Facades\Auth::check())
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
 
-                    <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
+                        <x-responsive-nav-link :href="route('logout')"
+                                               onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                        {{ __('Log out') }}
+                            {{ __('Log out') }}
+                        </x-responsive-nav-link>
+                    </form>
+                @else
+                    <x-responsive-nav-link :href="route('login')">
+                        {{ __('Login') }}
                     </x-responsive-nav-link>
-                </form>
+                    <x-responsive-nav-link :href="route('register')">
+                        {{ __('Register') }}
+                    </x-responsive-nav-link>
+                @endif
             </div>
         </div>
     </div>
