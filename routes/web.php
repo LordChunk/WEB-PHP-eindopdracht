@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CinemaController;
 use App\Http\Controllers\FestivalController;
+use App\Http\Controllers\FestivalTicketUserController;
 use App\Http\Controllers\OrderableController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\ShowController;
@@ -31,6 +32,8 @@ Route::resource('restaurants', RestaurantController::class);
 Route::resource('cinema', CinemaController::class);
 Route::resource('orderables', OrderableController::class);
 Route::resource('show', ShowController::class);
+Route::resource('festivalticketusers', FestivalTicketUserController::class);
+
 Route::get('show/{show}/book/{column}/{seat}', [ShowController::class, 'book'])
     ->middleware(['auth'])
     ->name('show.book');

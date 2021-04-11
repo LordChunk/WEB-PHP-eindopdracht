@@ -20,8 +20,6 @@ class CreateFestivalTicketUsersTable extends Migration
             $table->integer('number_of_tickets');
             $table->integer('start_day');
             $table->integer('end_day');
-            $table->timestamp('start_time');
-            $table->timestamp('end_time');
             $table->timestamps();
         });
     }

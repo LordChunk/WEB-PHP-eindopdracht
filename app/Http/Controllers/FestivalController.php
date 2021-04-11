@@ -47,11 +47,6 @@ class FestivalController extends Controller
         return redirect()->route('festivals.show', $festival);
     }
 
-    public function buy(Festival $festival)
-    {
-        return view('festivals.buy', compact('festival'));
-    }
-
     /**
      * Display the specified resource.
      *
