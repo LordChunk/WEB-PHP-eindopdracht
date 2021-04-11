@@ -36,12 +36,21 @@ class RegisteredUserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|confirmed|min:8',
+            'street' => 'required',
+            'house_number' => 'required',
+            'postcode' => 'required',
+            'country' => 'required',
         ]);
 
         Auth::login($user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'street' => $request->street,
+            'house_number' => $request->house_number,
+            'postcode' => $request->postcode,
+            'country' => $request->country,
+            'role_id' => 2,
         ]));
 
         event(new Registered($user));

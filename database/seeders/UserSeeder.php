@@ -20,6 +20,10 @@ class UserSeeder extends Seeder
             'email' => 'admin@admin.com',
             'password' => Hash::make('admin@admin.com'),
             'role_id' => '1',
+            'street' => 'Adminstreet',
+            'house_number' => 9,
+            'postcode' => '1337HX',
+            'country' => 'fr',
         ]);
 
         User::create([
@@ -27,6 +31,10 @@ class UserSeeder extends Seeder
             'email' => 'user@user.com',
             'password' => Hash::make('user@user.com'),
             'role_id' => '2',
+            'street' => 'Userstreet',
+            'house_number' => 2,
+            'postcode' => '1337HC',
+            'country' => 'nl',
         ]);
     }
 }

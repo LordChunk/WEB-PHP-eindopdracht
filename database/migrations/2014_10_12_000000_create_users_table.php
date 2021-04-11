@@ -20,6 +20,10 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->foreignId('role_id')->constrained();
+            $table->string('street');
+            $table->unsignedInteger('house_number');
+            $table->string('postcode');
+            $table->string('country');
             $table->rememberToken();
             $table->timestamps();
         });
