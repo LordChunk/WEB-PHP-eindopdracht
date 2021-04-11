@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\CinemaController;
+use App\Http\Controllers\FestivalController;
+use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\ShowController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +21,8 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::resource('festivals', FestivalController::class);
+Route::resource('restaurants', RestaurantController::class);
 Route::resource('cinema', CinemaController::class);
 Route::resource('show', ShowController::class);
 Route::get('show/{show}/book/{column}/{seat}', [ShowController::class, 'book'])

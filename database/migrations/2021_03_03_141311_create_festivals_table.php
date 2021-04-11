@@ -15,11 +15,11 @@ class CreateFestivalsTable extends Migration
     {
         Schema::create('festivals', function (Blueprint $table) {
             $table->id();
-            $table->string('Name');
-            $table->string('Location');
-            $table->integer('NumberOfTickets');
-            $table->dateTime('StartDate');
-            $table->dateTime('EndDate');
+            $table->string('name');
+            $table->string('location');
+            $table->integer('numberOfTickets');
+            $table->dateTime('startDate');
+            $table->dateTime('endDate');
             $table->timestamps();
         });
     }

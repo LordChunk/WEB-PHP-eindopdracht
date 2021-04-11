@@ -2,8 +2,8 @@
 
 @section('content')
 
-    <a href="/" class="btn btn-primary">
-        <p>hello</p>
+    <a href="{{route('restaurants.index')}}" class="btn btn-primary">
+        <p>Show restaurants</p>
     </a>
 
 @endsection
