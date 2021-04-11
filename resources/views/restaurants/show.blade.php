@@ -24,10 +24,10 @@
             </p>
             <p>
                 <label for="time">Time of reservation</label><br>
-                <input type="time" id="time" name="time" placeholder="Time of reservation">
+                <select name="time" id="time"></select>
             </p>
 
-            <button type="submit">Submit order</button>
+            <button type="submit" class="btn btn-primary">Submit order</button>
         </form>
     @endauth
 @endsection

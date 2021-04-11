@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RestaurantController extends Controller
 {
@@ -47,6 +48,14 @@ class RestaurantController extends Controller
      */
     public function show(Restaurant $restaurant)
     {
+        $availableTimeSlots = [];
+
+        $reservations = DB::table('restaurant_reservations')
+            ->where('restaurant_reservations.restaurant_id', '=', $restaurant->id)
+            ->get();
+
+        return $reservations;
+
         return view('restaurants.show', compact('restaurant'));
     }
 
