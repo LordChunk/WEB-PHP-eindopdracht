@@ -25,9 +25,9 @@ class FestivalTicketUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Festival $festival)
     {
-        //
+        return view('festivalticketusers.create', compact('festival'));
     }
 
     /**
@@ -38,18 +38,30 @@ class FestivalTicketUserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'photo' => ['required',' mimetypes:jpeg,bmp,png'],
+            'number_of_tickets' => ['required', 'max:4'],
+            'start_day' => ['required', 'ite:end_day'],
+            'end_day' => ['required'],
+        ]);
+
+        $data->festival_id = $request->festival_id;
+        $data->user_id = Auth::user()->getAuthIdentifier()->id;
+
+        $festivalTicketUser = FestivalTicketUser::create($data);
+
+        return redirect()->route('customers.show', $festivalTicketUser);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\show  $show
+     * @param FestivalTicketUser $festivalTicketUser
      * @return \Illuminate\Http\Response
      */
-    public function show(Festival $festival)
+    public function show(FestivalTicketUser $festivalTicketUser)
     {
-        return view('festivalticketusers.show', compact('festival'));
+        return view('festivalticketusers.show', compact('festivalTicketUser'));
     }
 
     /**

@@ -16,7 +16,7 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        $restaurants = Restaurant::all();
+        $restaurants = Restaurant::all()->sortBy('restaurant_type_id');
         return View('restaurants.index', compact('restaurants'));
     }
 

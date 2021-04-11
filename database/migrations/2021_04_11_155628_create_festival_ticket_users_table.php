@@ -18,6 +18,7 @@ class CreateFestivalTicketUsersTable extends Migration
             $table->foreignId('festival_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->integer('number_of_tickets');
+            $table->string('photo');
             $table->integer('start_day');
             $table->integer('end_day');
             $table->timestamps();
