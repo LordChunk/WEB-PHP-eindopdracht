@@ -40,4 +40,21 @@ class ExampleTest extends DuskTestCase
                 ->assertSee('Selected Restaurant');
         });
     }
+
+    public function testCinemaIndexFromHomePage()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/cinema')
+                ->assertSee('Vue Eindhoven');
+        });
+    }
+
+    public function testCinemaShowFromHomePage()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/cinema')
+                ->clickLink('Vue Eindhoven')
+                ->assertSee('Vue');
+        });
+    }
 }

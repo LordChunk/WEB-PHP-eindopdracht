@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('header')
-    <h1>Selected Cinema: {{$cinema->location}}</h1>
+    <h1>Selected Cinema: {{$cinema->name}}</h1>
 @endsection
 @section('content')
     <div>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CinemaController;
 use App\Http\Controllers\FestivalController;
+use App\Http\Controllers\OrderableController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\ShowController;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,7 @@ Route::get('/', function () {
 Route::resource('festivals', FestivalController::class);
 Route::resource('restaurants', RestaurantController::class);
 Route::resource('cinema', CinemaController::class);
+Route::resource('orderables', OrderableController::class);
 Route::resource('show', ShowController::class);
 Route::get('show/{show}/book/{column}/{seat}', [ShowController::class, 'book'])
     ->middleware(['auth'])
@@ -34,7 +36,7 @@ Route::get('show/{show}/book/{column}/{seat}/confirm', [ShowController::class, '
     ->name('show.book.confirm');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('home');
 })->middleware(['auth'])->name('dashboard');
 
 
