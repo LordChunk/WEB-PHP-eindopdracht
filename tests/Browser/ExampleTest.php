@@ -15,11 +15,29 @@ class ExampleTest extends DuskTestCase
      *
      * @return void
      */
-    public function testBasicExample()
+    public function testHome()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
-                    ->assertSee('Laravel');
+                    ->assertSee('Show restaurants');
+        });
+    }
+
+    public function testRestaurantIndexFromHomePage()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/')
+                ->clickLink('Show restaurants')
+                ->assertSee('All Restaurants');
+        });
+    }
+
+    public function testRestaurantShowFromHomePage()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/restaurants')
+                ->clickLink('De Lindehof')
+                ->assertSee('Selected Restaurant');
         });
     }
 }

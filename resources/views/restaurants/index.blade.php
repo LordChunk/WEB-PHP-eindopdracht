@@ -5,7 +5,7 @@
 @section('content')
     @foreach($restaurants as $restaurant)
         <p><h3>
-            <a href="{{route('cinema.show', $restaurant)}}">
+            <a href="{{route('restaurants.show', $restaurant)}}">
                 {{$restaurant->name}}
                 uit {{$restaurant->location}}
                 soort: {{$restaurant->restaurantType->type}}
